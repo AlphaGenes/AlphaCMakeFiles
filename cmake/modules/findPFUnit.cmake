@@ -32,17 +32,17 @@ else(DEFINED PFUNIT_DIR)
     set(PFUNIT_DIR ${PROJECT_BINARY_DIR}/external/pfunit)
 endif(DEFINED PFUNIT_DIR)
 
-file(MAKE_DIRECTORY ${LIB}/generated)
-file(WRITE ${LIB}/generated/testSuites.inc "")
+file(MAKE_DIRECTORY ${OBJ}/generated)
+file(WRITE ${OBJ}/generated/testSuites.inc "")
 
 include_directories(${PFUNIT_DIR}/source)
 
 include_directories(
     # ${TESTS}
     ${SRC}
-    # ${LIB}
+    # ${OBJ}
     ${PFUNIT_DIR}/mod
-    ${LIB}/generated
+    ${OBJ}/generated
     )
 message(STATUS "Manual setup of variable PFUNIT_DIR : ${SRC}/*.f90")
 set(_test_sources)
@@ -56,12 +56,12 @@ endif()
     get_filename_component (_test ${_file} NAME_WE)
     set(test_dependency ${TESTS}/${_test}.pf ${SRC}/*.f90)
     add_custom_command(
-        OUTPUT ${LIB}/generated/${_test}.F90
-        COMMAND python ${PFUNIT_DIR}/bin/pFUnitParser.py ${TESTS}/${_test}.pf ${LIB}/generated/${_test}.F90
+        OUTPUT ${OBJ}/generated/${_test}.F90
+        COMMAND python ${PFUNIT_DIR}/bin/pFUnitParser.py ${TESTS}/${_test}.pf ${OBJ}/generated/${_test}.F90
         DEPENDS ${test_dependency}
         )
-    set(_test_sources ${_test_sources} ${LIB}/generated/${_test}.F90)
-    file(APPEND ${LIB}/generated/testSuites.inc "ADD_TEST_SUITE(${_test}_suite)\n")
+    set(_test_sources ${_test_sources} ${OBJ}/generated/${_test}.F90)
+    file(APPEND ${OBJ}/generated/testSuites.inc "ADD_TEST_SUITE(${_test}_suite)\n")
 endforeach()
 
 set_source_files_properties(${PFUNIT_DIR}/include/driver.F90 PROPERTIES GENERATED 1)
