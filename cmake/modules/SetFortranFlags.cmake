@@ -175,6 +175,29 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                 )
 
 
+# Unroll loops
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-funroll-loops" # GNU
+                         "-unroll"        # Intel
+                         "/unroll"        # Intel Windows
+                         "-Munroll"       # Portland Group
+                )
+
+# Inline functions
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-inline"            # Intel
+                         "/Qinline"           # Intel Windows
+                         "-finline-functions" # GNU
+                         "-Minline"           # Portland Group
+                )
+# Single-file optimizations
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-ip"  # Intel
+                         "/Qip" # Intel Windows
+                )
+
+
+
 #####################
 ### PROFILEFLAGS ###
 #####################
@@ -188,32 +211,13 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                  Fortran REQUIRED "-O3" # All compilers not on Windows
                                   "/O3" # Intel Windows
                 )
-# Unroll loops
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-funroll-loops" # GNU
-                         "-unroll"        # Intel
-                         "/unroll"        # Intel Windows
-                         "-Munroll"       # Portland Group
-                )
 
-# Inline functions
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-inline"            # Intel
-                         "/Qinline"           # Intel Windows
-                         "-finline-functions" # GNU
-                         "-Minline"           # Portland Group
-                )
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                  Fortran "-fp-model precise"            # Intel
                          "/fp:precise"           # Intel Windows
                 )
 
-# Single-file optimizations
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-ip"  # Intel
-                         "/Qip" # Intel Windows
-                )
 
 if (HDF5PATH)
     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
