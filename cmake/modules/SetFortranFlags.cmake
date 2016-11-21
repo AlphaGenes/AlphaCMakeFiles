@@ -85,12 +85,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                 )
 
 
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-                 Fortran "-xHost"        # Intel
-                         "/QxHost"       # Intel Windows
-                         ${GNUNATIVE}    # GNU
-                         "-ta=host"      # Portland Group
-                )
+
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-fpp"  # Intel
                          "-fpp" # Intel Windows
@@ -163,10 +158,21 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
 
 # Optimizations
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran REQUIRED "-O2" # All compilers not on Windows
-                                  "/O2" # Intel Windows
+                 Fortran REQUIRED "-O3" # All compilers not on Windows
+                                  "/O3" # Intel Windows
                 )
-
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-xHost"        # Intel
+                         "/QxHost"       # Intel Windows
+                         ${GNUNATIVE}    # GNU
+                         "-ta=host"      # Portland Group
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
 
 
 #####################
@@ -198,6 +204,10 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                          "-Minline"           # Portland Group
                 )
 
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+                 Fortran "-fp-model precise"            # Intel
+                         "/fp:precise"           # Intel Windows
+                )
 
 # Single-file optimizations
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
