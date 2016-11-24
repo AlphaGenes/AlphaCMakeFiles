@@ -106,7 +106,8 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "${OpenMP_Fortran_FLAGS}" # Intel
                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-                 Fortran "-openmp-link=static" # Intel
+                 Fortran "-qopenmp-link=static" # Intel
+                 "-openmp-link=static" # Intel
                 )
 endif()
 ###################
