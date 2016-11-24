@@ -35,6 +35,7 @@ SET (OpenMP_Fortran_FLAG_CANDIDATES
      "/Qopenmp" 
      #Intel
      "-openmp" 
+     "-qopenmp"
      #Gnu
      "-fopenmp"
      #Empty, if compiler automatically accepts openmp
