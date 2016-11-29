@@ -34,8 +34,8 @@ find_path(MKL_INCLUDE_DIR mkl.h
 # Find include directory
 #  There is no include folder under linux
 if(WIN32)
-    find_path(INTEL_INCLUDE_DIR omp.h
-        PATHS ${INTEL_ROOT}/include)
+    find_path(INTEL_INCLUDE_DIR mkl_service.h
+        PATHS ${MKL_ROOT}/include)
     set(MKL_INCLUDE_DIR ${MKL_INCLUDE_DIR} ${INTEL_INCLUDE_DIR})
 endif()
 
@@ -122,5 +122,5 @@ if(MKL_FOUND)
     set(MKL_LIBRARIES ${MKL_LIBRARY})
     set(MKL_MINIMAL_LIBRARIES ${MKL_LIBRARY})
 else()
-    message("MKL not found at !{")
+    message("MKL not found at ${MKL_INCLUDE_DIR}")
 endif(MKL_FOUND)
