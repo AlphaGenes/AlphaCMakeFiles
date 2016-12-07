@@ -1,5 +1,5 @@
 
-SET (PFUNIT_DIR "/usr/local/pFUnit_2015")
+SET (PFUNIT_DIR "/usr/local/pFUnit_serial")
 
 
 enable_testing()
