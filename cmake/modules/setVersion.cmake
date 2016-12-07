@@ -1,0 +1,7 @@
+if (WIN32)
+	execute_process(COMMAND CMD git rev-parse --short HEAD OUTPUT_VARIABLE SUBVERSION)
+	execute_process(COMMAND CMD git describe --abbrev=0 --tags OUTPUT_VARIABLE VERSION)
+else()
+	execute_process(COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE SUBVERSION)
+	execute_process(COMMAND git describe --tag OUTPUT_VARIABLE VERSION)
+endif()
