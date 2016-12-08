@@ -120,10 +120,11 @@ find_package_handle_standard_args(MKL DEFAULT_MSG
 
 # Add specific libs from MKL
 if (APPLE)
-set(BLAS_LIBRARIES ${MKL_ROOT}/lib/libmkl_blas95_ilp64.a ${MKLROOT}/lib/libmkl_intel_ilp64.a ${MKLROOT}/lib/libmkl_intel_thread.a ${MKLROOT}/lib/libmkl_core.a)
+set(BLAS_LIBRARIES "${MKL_ROOT}/lib/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/libmkl_intel_thread.a ${MKL_ROOT}/lib/libmkl_core.a")
 set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 else()
-set(BLAS_LIBRARIES  ${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a)
+set(BLAS_LIBRARIES  "${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a")
+set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 endif()
 
 
