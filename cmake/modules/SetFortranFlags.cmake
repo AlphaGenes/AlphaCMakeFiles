@@ -239,7 +239,7 @@ if (MKL_FOUND)
                     "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} /Qmkl"
                     )
     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
-                    Fortran "-I${BLAS_LIBRARIES_INCLUDE}"
+                    Fortran "-I${BLAS_LIBRARIES_INCLUDE} -lpthread -lm -ldl"
                     )
 
     # message("MKL ${BLAS_LIBRARIES_INCLUDE} ${BLAS_LIBRARIES}" )
