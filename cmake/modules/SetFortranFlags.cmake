@@ -196,6 +196,13 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran "-ip"  # Intel
                          "/Qip" # Intel Windows
                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                   Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
+
 
 
 
@@ -231,6 +238,9 @@ if (MKL_FOUND)
     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
                     Fortran "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} -mkl"
                     "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} /Qmkl"
+                    )
+    SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
+                    Fortran "-I${BLAS_LIBRARIES_INCLUDE} ${BLAS_LIBRARIES}"
                     )
 endif(MKL_FOUND) 
 

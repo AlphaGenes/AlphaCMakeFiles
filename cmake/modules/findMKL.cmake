@@ -117,6 +117,17 @@ set(CMAKE_FIND_LIBRARY_SUFFIXES ${_MKL_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
 find_package_handle_standard_args(MKL DEFAULT_MSG
     MKL_INCLUDE_DIR MKL_LIBRARY MKL_MINIMAL_LIBRARY)
 
+
+# Add specific libs from MKL
+if (APPLE)
+set(BLAS_LIBRARIES ${MKL_ROOT}/lib/libmkl_blas95_ilp64.a ${MKLROOT}/lib/libmkl_intel_ilp64.a ${MKLROOT}/lib/libmkl_intel_thread.a ${MKLROOT}/lib/libmkl_core.a)
+set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
+else()
+set(BLAS_LIBRARIES  ${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a)
+endif()
+
+
+
 if(MKL_FOUND)
     set(MKL_INCLUDE_DIRS ${MKL_INCLUDE_DIR})
     set(MKL_LIBRARIES ${MKL_LIBRARY})
