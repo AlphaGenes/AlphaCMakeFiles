@@ -1,0 +1,17 @@
+
+# List all src files below inside set
+SET(<PROGRAMEXE>
+            ${<SRCPROGRAM>}<srcFile>.f90
+            .
+            .
+            .
+)
+
+add_definitions(-D COMMIT=${VERSION})
+ADD_EXECUTABLE(${<PROGRAMEXE>} ${<PROGRAMEXE>})
+
+
+# add external links here
+TARGET_LINK_LIBRARIES(${<PROGRAMEXE>} ${AHLIB})
+INSTALL(TARGETS ${<PROGRAMEXE>} RUNTIME DESTINATION bin)
+
