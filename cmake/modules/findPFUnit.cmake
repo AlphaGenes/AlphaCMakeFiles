@@ -1,10 +1,12 @@
 
-SET (PFUNIT_DIR "/usr/local/pFUnit_serial")
+set(PFUNIT_DIR $ENV{PFUNITDIR})
 
+
+if (NOT PFUNIT_DIR)
+SET (PFUNIT_DIR "/usr/local/pFUnit_serial")
+endif(NOT PFUNIT_DIR)
 
 enable_testing()
-
-# SET(_files ${TESTS}/TestASIndividualModule.pf)
 
 
 if(DEFINED PFUNIT_DIR)

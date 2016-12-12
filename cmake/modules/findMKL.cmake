@@ -14,20 +14,27 @@
 #   MKL_INCLUDE_DIRS     : set when MKL_INCLUDE_DIR found
 #   MKL_LIBRARIES        : the library to link against.
 SET(MKL_STATIC TRUE)
-
 include(FindPackageHandleStandardArgs)
-if(APPLE)
-    set(INTEL_ROOT "/opt/intel" CACHE PATH "Folder contains intel libs")
-elseif (WIN32)
-    set(INTEL_ROOT "C:\\Program Files (x86)\\IntelSWTools\\compilers_and_libraries\\windows" CACHE PATH "Folder contains intel libs")
-else ()
-    set (INTEL_ROOT "/exports/applications/apps/SL7/intel/parallel_studio_xe_2016" CACHE PATH "Folder contains intel libs")
-endif()
-message("intel root: ${INTEL_ROOT}")
-set(MKL_ROOT ${INTEL_ROOT}/mkl)
+
+set(MKL_ROOT $ENV{MKLROOT})
+
+if (NOT MKL_ROOT)
+    if(APPLE)
+        set(INTEL_ROOT "/opt/intel" CACHE PATH "Folder contains intel libs")
+    elseif (WIN32)
+        set(INTEL_ROOT "C:\\Program Files (x86)\\IntelSWTools\\compilers_and_libraries\\windows" CACHE PATH "Folder contains intel libs")
+    else ()
+        set (INTEL_ROOT "/exports/applications/apps/SL7/intel/parallel_studio_xe_2016" CACHE PATH "Folder contains intel libs")
+    endif()
+    set(MKL_ROOT ${INTEL_ROOT}/mkl)
+endif(NOT MKL_ROOT)
+
+
 set(MKL_ROOT_LIB ${MKL_ROOT}/lib)
 set(INTEL_RTL_ROOT ${INTEL_ROOT}/lib)
 # Find include dir
+
+
 find_path(MKL_INCLUDE_DIR mkl.h
     PATHS ${MKL_ROOT}/include)
 
