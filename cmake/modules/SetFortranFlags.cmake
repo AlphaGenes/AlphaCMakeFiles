@@ -81,7 +81,6 @@ endif()
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-static-intel"        # Intel
-                         "/static:libs"      # Intel Windows
                 )
 
 
