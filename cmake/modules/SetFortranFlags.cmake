@@ -94,11 +94,6 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
 #                  Fortran "-DOS_UNIX"  # Intel
 #                          "-DOS_WIN" # Intel Windows
 #                 )
-
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-                 Fortran "-I${MKL_INCLUDE_DIRS} -L${MKL_ROOT_LIB}" # Intel
-                )
-
 if (USE_OPENMP)
 message("flags here: ${OpenMP_Fortran_FLAGS}")
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"

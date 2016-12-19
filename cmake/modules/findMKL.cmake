@@ -103,7 +103,7 @@ else()
     # find_library(MKL_CORE_LIBRARY libmkl_core
         # PATHS ${MKL_ROOT}/lib/)
 
-    SET(MKL_CORE_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
+    # SET(MKL_CORE_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
     ############################ RTL layer ##########################
     if(WIN32)
         set(MKL_RTL_LIBNAME libiomp5md)
