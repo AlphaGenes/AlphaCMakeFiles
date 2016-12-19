@@ -249,7 +249,8 @@ endif(HDF5PATH)
 if (MKL_FOUND)
     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
                     Fortran "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} -mkl"
-                    "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} /Qmkl"
+                    "-L${MKL_ROOT_LIB} 
+                     /Qmkl"
                     )
     # SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
     #                 Fortran "-I${BLAS_LIBRARIES_INCLUDE} -lpthread -lm -ldlif"
