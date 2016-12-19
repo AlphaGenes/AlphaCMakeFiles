@@ -46,7 +46,7 @@ include_directories(
     ${PFUNIT_DIR}/mod
     ${OBJ}/generated
     )
-message(STATUS "Manual setup of variable PFUNIT_DIR : ${SRC}/*.f90")
+message(STATUS "Manual setup of variable PFUNIT_DIR : ${PFUNIT_DIR}")
 set(_test_sources)
 if (NOT DEFINED TESTFILES)
     file(GLOB files "${TESTS}/*.pf")   

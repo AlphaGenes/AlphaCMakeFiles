@@ -147,6 +147,19 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                          "-Mbounds"       # Portland Group
                 )
 
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-fstack-protector"  # Intel
+                )
+
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-assume protect_parens"  # Intel
+                        "/assume:protect_parens"
+                )
+ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-implicitnone"  # Intel
+                        "/assume:protect_parens"
+                ) 
+
 # SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
 #                  Fortran "-check all"  # Intel
 #                          "/check:all"  # Intel Windows
