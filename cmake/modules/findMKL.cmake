@@ -137,7 +137,7 @@ else()
         set(BLAS_LIBRARIES  mkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
     else()
         set(BLAS_PATH "${MKL_ROOT}/lib/intel64")
-        set(BLAS_LIBRARIES  "${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a")
+        set(BLAS_LIBRARIES  libmkl_blas95_ilp64.a libmkl_intel_ilp64.a libmkl_intel_thread.a libmkl_core.a)
 
     endif(WIN32)
 # set(BLAS_LIBRARIES  "${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a")
@@ -145,6 +145,7 @@ set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 endif()
 
 message("BLAS PATH: ${BLAS_PATH}")
+message("BLAS LIBRARIES: ${BLAS_LIBRARIES}")
 LINK_DIRECTORIES(${BLAS_PATH})
 FIND_LIBRARY(RESULT ${BLAS_LIBRARIES} PATHS ${BLAS_PATH})
 
