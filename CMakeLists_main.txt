@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
 PROJECT(AlphaImpute)
 enable_language (Fortran)
 
-
+find_package(Doxygen)
 OPTION(RUN_TESTS "Run and compile tests"
   OFF)
 OPTION(USE_HDF5 "Use hdf"
