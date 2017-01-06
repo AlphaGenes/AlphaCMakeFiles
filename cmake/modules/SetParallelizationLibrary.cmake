@@ -2,7 +2,7 @@
 # If both are requested, the other is disabled
 # When one is turned on, the other is turned off
 # If both are off, we explicitly disable them just in case
-
+OPTION(CHECK_PARA "Check if paralellization works" ON)
 IF (USE_OPENMP AND USE_MPI)
     MESSAGE (FATAL_ERROR "Cannot use both OpenMP and MPI")
 ELSEIF (USE_OPENMP)
