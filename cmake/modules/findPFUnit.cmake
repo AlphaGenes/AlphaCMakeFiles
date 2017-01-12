@@ -49,7 +49,7 @@ include_directories(
 message(STATUS "Manual setup of variable PFUNIT_DIR : ${PFUNIT_DIR}")
 set(_test_sources)
 if (NOT DEFINED TESTFILES)
-    file(GLOB files "${TESTS}/*.pf")   
+    file(GLOB files "${TESTS}/*.pf")
 else()
     set(files ${TESTFILES})
 endif()
@@ -77,7 +77,7 @@ add_executable(
     ${testDeps}
     ${PFUNIT_DIR}/include/driver.F90
     ${_test_sources}
-    
+
     )
 
 target_link_libraries(
@@ -86,6 +86,7 @@ target_link_libraries(
     )
 
 TARGET_LINK_LIBRARIES(pftest_alltests ${AHLIB})
+TARGET_LINK_LIBRARIES(pftest_alltests ${RESULT})
 
 add_test(pftest_alltests ${BIN}/pftest_alltests)
 INSTALL(TARGETS pftest_alltests RUNTIME DESTINATION bin)
