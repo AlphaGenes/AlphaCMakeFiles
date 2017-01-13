@@ -89,10 +89,11 @@ TARGET_LINK_LIBRARIES(pftest_alltests ${AHLIB})
 
 
 # add external links here
-TARGET_LINK_LIBRARIES(pftest_alltests ${AHLIB})
-if (${MKL_LAPACK_LIB})
+TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_BLAS_LIB})
+
+#if (${MKL_LAPACK_LIB})
       TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_LAPACK_LIB})
-endif()
+      #endif()
 
 if (${MKL_SCALAPACK_LIB})
       TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_SCALAPACK_LIB})
