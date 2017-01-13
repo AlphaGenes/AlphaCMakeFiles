@@ -125,29 +125,49 @@ find_package_handle_standard_args(MKL DEFAULT_MSG
     MKL_INCLUDE_DIR MKL_LIBRARY MKL_MINIMAL_LIBRARY)
 
 
-# Add specific libs from MKL
-if (APPLE)
-# set(MKL_LIBRARIES "${MKL_ROOT}/lib/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/libmkl_intel_thread.a ${MKL_ROOT}/lib/libmkl_core.a")
-set(MKL_EXTRA_PATH "${MKL_ROOT}/lib")
-set(MKL_LIBRARIES  libmkl_blas95_ilp64.a libmkl_intel_ilp64.a libmkl_intel_thread.a libmkl_core.a)
-set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
+if(WIN32)
+    set(MKL_EXTRA_PATH "${MKL_ROOT}\\lib\\intel64")
+    set(MKL_BLAS  mkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(MKL_SCALAPACK mkl_scalapack_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES}
+    set(MKL_LAPACK mkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
+    set(MKL_ILP mkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(MKL_THREAD mkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
+    set(MKL_CORE mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES}))
 else()
-    if(WIN32)
-        set(MKL_EXTRA_PATH "${MKL_ROOT}\\lib\\intel64")
-        set(MKL_LIBRARIES  mkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_scalapack_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
+    if (APPLE)
+        set(MKL_EXTRA_PATH "${MKL_ROOT}/lib")
     else()
         set(MKL_EXTRA_PATH "${MKL_ROOT}/lib/intel64")
-        set(MKL_LIBRARIES  libmkl_blas95_ilp64.a libmkl_lapack95_ilp64.a libmkl_scalapack_ilp64.a libmkl_intel_ilp64.a libmkl_intel_thread.a libmkl_core.a)
+    endif()
+    set(MKL_BLAS  libmkl_blas95_ilp64.a)
+    set(MKL_LAPACK libmkl_lapack95_ilp64.a)
+    set(MKL_SCALAPACK libmkl_scalapack_ilp64.a )
+    set(MKL_ILP libmkl_intel_ilp64.a )
+    set(MKL_THREAD libmkl_intel_thread.a )
+    set(MKL_CORE libmkl_core.a)
 
-    endif(WIN32)
+endif(WIN32)
 # set(MKL_LIBRARIES  "${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a")
-set(BLAS_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
-endif()
+set(MKL_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
+
+
 
 message("BLAS PATH: ${MKL_EXTRA_PATH}")
-message("BLAS LIBRARIES: ${MKL_LIBRARIES}")
+message("BLAS PATH: ${MKL_BLAS}")
+include_directories(${MKL_LIBRARIES_INCLUDE})
 LINK_DIRECTORIES(${MKL_EXTRA_PATH})
-FIND_LIBRARY(RESULT ${MKL_LIBRARIES} PATHS ${MKL_EXTRA_PATH})
+
+# FIND_LIBRARY(RESULT ${MKL_LIBRARIES} PATHS ${MKL_EXTRA_PATH})
+
+FIND_LIBRARY(MKL_BLAS_LIB ${MKL_BLAS} PATHS ${MKL_EXTRA_PATH})
+
+message("BLAS at : ${MKL_BLAS_LIB}")
+FIND_LIBRARY(MKL_LAPACK_LIB ${MKL_LAPACK} PATHS ${MKL_EXTRA_PATH})
+FIND_LIBRARY(MKL_SCALAPACK_LIB ${MKL_SCALAPACK} PATHS ${MKL_EXTRA_PATH})
+FIND_LIBRARY(MKL_ILP_LIB ${MKL_ILP} PATHS ${MKL_EXTRA_PATH})
+FIND_LIBRARY(MKL_THREAD_LIB ${MKL_THREAD} PATHS ${MKL_EXTRA_PATH})
+FIND_LIBRARY(MKL_CORE_LIB ${MKL_CORE} PATHS ${MKL_EXTRA_PATH})
+
 
 
 #Link to blas like this  TARGET_LINK_LIBRARIES(${TESTPROG} ${RESULT})
