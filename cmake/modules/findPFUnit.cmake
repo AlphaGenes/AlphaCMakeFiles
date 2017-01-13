@@ -86,7 +86,21 @@ target_link_libraries(
     )
 
 TARGET_LINK_LIBRARIES(pftest_alltests ${AHLIB})
-TARGET_LINK_LIBRARIES(pftest_alltests ${RESULT})
+
+
+# add external links here
+TARGET_LINK_LIBRARIES(pftest_alltests ${AHLIB})
+if (${MKL_LAPACK_LIB})
+      TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_LAPACK_LIB})
+endif()
+
+if (${MKL_SCALAPACK_LIB})
+      TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_SCALAPACK_LIB})
+endif()
+TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_ILP_LIB})
+TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_THREAD_LIB})
+TARGET_LINK_LIBRARIES(pftest_alltests ${MKL_CORE_LIB})
+
 
 add_test(pftest_alltests ${BIN}/pftest_alltests)
 INSTALL(TARGETS pftest_alltests RUNTIME DESTINATION bin)
