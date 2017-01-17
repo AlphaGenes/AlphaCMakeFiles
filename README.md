@@ -127,6 +127,11 @@ If you want to use tests, set RUN_TESTS to on.   If you want to use HDF5, set US
 ensure that the CMakeModulePath points to the right place to find the module files.  Generally this will involve changin `${CMAKE_SOURCE_DIR}/..`.   Ensure that you are pointing to the actual modules (i.e. include `/alphacmakefiles/cmake/modules`).
 
 ```
+    SET(SRCAH ../alphahouse/src/)
+```
+Replace `../alphahouse/src/` with the path to your AlphaHouse source files.
+
+```
     SET(PROGRAMEXE <name_of_exe>)
 ```
 Replace ` <name_of_exe>` with the name of your program (the name that you want the executable to have).
