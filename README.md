@@ -144,7 +144,6 @@ Here list all of the dependencies for the test that have been written.   Only ap
 ### CMake Source File###
 CMakeLists_src.txt goes in the /src file.   It tells CMake which files to compile.
 
-### Using Cmake on Mac ###
 ```
     # List all src files below inside set
     SET(<PROGRAMEXE>
