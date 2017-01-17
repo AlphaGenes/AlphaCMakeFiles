@@ -8,6 +8,8 @@ To use CMake, the project directory needs to have 4 folders in it.   These are /
 
 When using CMake, the various options are set using a file called CMakeLists.txt.   There are two of these.   The first gives the overall project options and lives in the main folder of your project.   The second gives the files to compile, together with any libraries that are in use.   This file resides in <projectDirectory>/src.
 
+### Main CMake File ###  
+Inside of the alphacmake folder you will find 3 text files, CMakeLists_main.txt, CMakeLists_src.txt and CMakeEddie.sh.   Below is the main CMake file.
 ```
     CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
     PROJECT(<ProjectName>)
@@ -105,18 +107,57 @@ When using CMake, the various options are set using a file called CMakeLists.txt
     	INCLUDE(${CMAKE_MODULE_PATH}/findPFUnit.cmake)
     endif(${RUN_TESTS})
 ```
+The vast majority of this file will not be changed during different projects.   However, it is required to change the following:
+```
+    PROJECT(<ProjectName>)
+```
+Replace `<ProjectName>` with the name of your program.
 
+```
+    OPTION(RUN_TESTS "Run and compile tests"
+      OFF)
+    OPTION(USE_HDF5 "Use hdf"
+           OFF)
+```
+If you want to use tests, set RUN_TESTS to on.   If you want to use HDF5, set USE_HDF% to On.
 
+```
+    SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../alphacmakefiles/cmake/modules")
+```
+ensure that the CMakeModulePath points to the right place to find the module files.  Generally this will involve changin `${CMAKE_SOURCE_DIR}/..`.   Ensure that you are pointing to the actual modules (i.e. include `/alphacmakefiles/cmake/modules`).
 
+```
+    SET(PROGRAMEXE <name_of_exe>)
+```
+Replace ` <name_of_exe>` with the name of your program (the name that you want the executable to have).
 
+```
+    SET(<SRCPROGRAM> ${SRC}/)
+```
+Replace <SRCPROGRAM> with the name of your choice.
 
+```
+    	SET(testDeps ${SRC}/<test_file_dep>.f90
+```
+Here list all of the dependencies for the test that have been written.   Only applicable if you want to run tests.   Ensure that internal dependencies are met (i.e. if B.f90 depends on A.f90 then A.f90 has to come before B.f90 in the list). (It is likely that this will change in the future to go in tests).
+
+### CMake Source File###
+CMakeLists_src.txt goes in the /src file.   It tells CMake which files to compile.
 
 ### Using Cmake on Mac ###
+```
+    # List all src files below inside set
+    SET(<PROGRAMEXE>
+                ${<SRCPROGRAM>}<srcFile>.f90
+                
+    )
+```
+Here you will replace <SRCPROGRAM> with the name previously used when setting up CMakeLists_main.txt. replace <srcFile> with the name of your file that you want to compile.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+If you want to use extra libraries other than AlphaHouse come talk to the maintainers.   AlphaHouse is set up automatically for you.
 
 ### Using Cmake on Eddie ###
 
-To use CMake on edd
+To use CMake on Eddie there are a few different enviromental variables that need to be set.   In order to set these,. run the script CMakeEddie.sh before trying to use CMake on eddie.
+
+If you are trying to compile using intel/2015u5 on Eddie, come talk to the maintainers.
