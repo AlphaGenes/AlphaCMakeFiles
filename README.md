@@ -8,8 +8,8 @@ To use CMake, the project directory needs to have 4 folders in it.   These are /
 
 When using CMake, the various options are set using a file called CMakeLists.txt.   There are two of these.   The first gives the overall project options and lives in the main folder of your project.   The second gives the files to compile, together with any libraries that are in use.   This file resides in <projectDirectory>/src.
 
-`
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
+
+`CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
 PROJECT(<ProjectName>)
 enable_language (Fortran)
 
