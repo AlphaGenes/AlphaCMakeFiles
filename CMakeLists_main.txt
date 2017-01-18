@@ -1,8 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
-PROJECT(AlphaImpute)
+PROJECT(PROJECTNAMETOREPLACE)
 enable_language (Fortran)
 
-find_package(Doxygen)
+#find_package(Doxygen)
 OPTION(RUN_TESTS "Run and compile tests"
   OFF)
 OPTION(USE_HDF5 "Use hdf"
@@ -10,18 +10,18 @@ OPTION(USE_HDF5 "Use hdf"
 
 set(CLUSTER 0 CACHE STRING "cluster size")
 # Add our local modlues to the module path
-SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../alphacmakefiles/cmake/modules")
+SET(CMAKE_MODULE_PATH PROJECTSOURCETOREPLACE/cmake/modules)
 set(CMAKE_MACOSX_RPATH 0)
 
-INCLUDE(${CMAKE_MODULE_PATH}/setVersion.cmake)
-
-INCLUDE(${CMAKE_MODULE_PATH}/findDoxygen.cmake)
+#INCLUDE(${CMAKE_MODULE_PATH}/setVersion.cmake)
+find_package(Doxygen)
+#INCLUDE(${CMAKE_MODULE_PATH}/findDoxygen.cmake)
 
 # add propressor variables like list
 add_definitions(-DCLUSTER=${CLUSTER})
 
 # Define the executable name
-SET(PROGRAMEXE <name_of_exe>)
+SET(PROJECTNAMETOREPLACEEXE PROJECTNAMETOREPLACE)
 MESSAGE("Prog name ${PROGRAMEXE}")
 
 
@@ -33,7 +33,7 @@ SET(SRC ${CMAKE_SOURCE_DIR}/src)
 SET(OBJ ${CMAKE_SOURCE_DIR}/objs)
 SET(BIN ${CMAKE_SOURCE_DIR}/bin)
 SET(TESTS ${CMAKE_SOURCE_DIR}/tests)
-SET(<SRCPROGRAM> ${SRC}/)
+SET(SRCPROJECTNAMETOREPLACE ${SRC}/)
 
 # Defined libary source
 
@@ -45,14 +45,13 @@ ENDIF(NOT CMAKE_Fortran_COMPILER_SUPPORTS_F90)
 # Set some options the user may choose
 # Uncomment the below if you want the user to choose a parallelization library
 OPTION(USE_MPI "Use the MPI library for parallelization" OFF)
-OPTION(USE_OPENMP "Use OpenMP for parallelization" ON)
+OPTION(USE_OPENMP "Use OpenMP for parallelization" OFF)
 
 
 if (${RUN_TESTS})
 	# list all test dependencies
-	SET(testDeps ${SRC}/<test_file_dep>.f90
-		...
-	)
+	SET(testDeps ${SRC}/TESTDEPTOREPLACE
+  )
 endif (${RUN_TESTS})
 
 # set(_files "test.pf")
@@ -73,7 +72,7 @@ endif(${USE_HDF5})
 # RELEASE, and TESTING.  You should  review this file and make sure the flags
 # are to your liking.
 INCLUDE(${CMAKE_MODULE_PATH}/SetFortranFlags.cmake)
-SET(SRCAH ../alphahouse/src/)
+SET(SRCAH ALPHAHOUSESRCTOREPLACE)
 
 # Have the .mod files placed in the OBJ folder
 SET(CMAKE_Fortran_MODULE_DIRECTORY ${OBJ})
@@ -83,7 +82,7 @@ ADD_SUBDIRECTORY(${SRCAH} ${OBJ}/AH)
 
 
 # TODO add tests to correct location
-ADD_SUBDIRECTORY(${SRCALPHAIMPUTE} ${BIN})
+ADD_SUBDIRECTORY(${SRCPROJECTNAMETOREPLACE} ${BIN})
 
 # Add a distclean target to the Makefile
 ADD_CUSTOM_TARGET(distclean
