@@ -89,6 +89,10 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-fpp"  # Intel
                          "-fpp" # Intel Windows
                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
+                 Fortran "-assume realloc_lhs"  # Intel
+                         "/assume:realloc_lhs" # Intel Windows
+                )
 
 # SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
 #                  Fortran "-DOS_UNIX"  # Intel
