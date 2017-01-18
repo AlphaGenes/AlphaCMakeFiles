@@ -11,13 +11,13 @@ done
 if [ $TEMP ]; then NAMES=$NAMESTEMP;fi
 if [ -z $FIRST ]; then exit 5;fi
 
-#CMAKEPATH="/Users/mbattagi/Gitbox/alphacmakefiles"
-CMAKEPATH="/Users/ddeburc/AlphaSuite_not_connected/alphacmakefiles"
+CMAKEPATH="/Users/mbattagi/Gitbox/alphacmakefiles"
+#CMAKEPATH="/Users/ddeburc/AlphaSuite_not_connected/alphacmakefiles"
 if [ -z $SECOND ]; then SECOND=$CMAKEPATH;fi
 echo $SECOND
 #CMAKEPATH2='\/Users\/mbattagi\/Gitbox\/alphacmakefiles'
-CMAKEPATH2='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphacmakefiles'
-AHSRC='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphahouse\/src'
+CMAKEPATH2='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphacmakefiles\/src'
+#AHSRC='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphahouse\/src'
 #AHSRC='\/Users\/mbattagi\/Gitbox\/alphahouse'
 MAIN="CMakeLists_main.txt"
 SRC="CMakeLists_src.txt"
