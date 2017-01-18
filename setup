@@ -1,0 +1,49 @@
+#!/bin/sh
+FIRST="$1"
+shift
+SECOND="$1"
+shift
+for i in $@;do
+  TEMP="HA"
+  NAMESTEMP=$NAMESTEMP\$\{SRC$FIRST\}$i" "
+  echo $NAMESTEMP
+done
+if [ $TEMP ]; then NAMES=$NAMESTEMP;fi
+if [ -z $FIRST ]; then exit 5;fi
+
+CMAKEPATH="/Users/ddeburc/AlphaSuite_not_connected/alphacmakefiles"
+if [ -z $SECOND ]; then SECOND=$CMAKEPATH;fi
+echo $SECOND
+CMAKEPATH2='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphacmakefiles'
+AHSRC='\/Users\/ddeburc\/AlphaSuite_not_connected\/AlphaHouse\/src'
+MAIN="CMakeLists_main.txt"
+SRC="CMakeLists_src.txt"
+
+ mkdir -p ./$FIRST
+ mkdir -p ./$FIRST/src
+ mkdir -p ./$FIRST/bin
+ mkdir -p ./$FIRST/objs
+ mkdir -p ./$FIRST/tests
+ cd $FIRST
+ git init
+ touch ./$FIRST/tests/testSuites.inc
+ PROG=./src/$FIRST.f90
+
+ echo "program $FIRST" > $PROG 
+ echo "implicit none" >> $PROG 
+ echo " " >> $PROG 
+ echo "write(*,*) 0" >> $PROG 
+ echo "end program $FIRST" >> $PROG 
+ git add src/$PROG.f90
+ git commit -m "EMPTY COMMIT"
+ cd ..
+ AFTER="$FIRST/CMakeLists.txt"
+ AFTERSRC="$FIRST/src/CMakeLists.txt"
+ cp $SECOND/$MAIN $AFTER
+ cp $SECOND/$SRC $AFTERSRC
+sed -ie s/PROJECTNAMETOREPLACE/$FIRST/g $AFTER
+sed -ie s/TESTDEPTOREPLACE/$FIRST/g $AFTER
+sed -ie s/PROJECTSOURCETOREPLACE/$CMAKEPATH2/g $AFTER
+sed -ie s/PROJECTNAMETOREPLACE/$FIRST/g $AFTERSRC
+sed -ie s/ALPHAHOUSESRCTOREPLACE/$AHSRC/g $AFTER
+
