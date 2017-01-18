@@ -25,7 +25,7 @@ SRC="CMakeLists_src.txt"
  mkdir -p ./$FIRST/objs
  mkdir -p ./$FIRST/tests
  cd $FIRST
- git init
+#! git init
  touch ./$FIRST/tests/testSuites.inc
  PROG=./src/$FIRST.f90
 
@@ -34,8 +34,8 @@ SRC="CMakeLists_src.txt"
  echo " " >> $PROG 
  echo "write(*,*) 0" >> $PROG 
  echo "end program $FIRST" >> $PROG 
- git add src/$PROG.f90
- git commit -m "EMPTY COMMIT"
+#! git add src/$PROG.f90
+# git commit -m "EMPTY COMMIT"
  cd ..
  AFTER="$FIRST/CMakeLists.txt"
  AFTERSRC="$FIRST/src/CMakeLists.txt"
