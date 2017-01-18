@@ -11,11 +11,14 @@ done
 if [ $TEMP ]; then NAMES=$NAMESTEMP;fi
 if [ -z $FIRST ]; then exit 5;fi
 
-CMAKEPATH="/Users/mbattagi/Gitbox/alphacmakefiles"
+#CMAKEPATH="/Users/mbattagi/Gitbox/alphacmakefiles"
+CMAKEPATH="/Users/ddeburc/AlphaSuite_not_connected/alphacmakefiles"
 if [ -z $SECOND ]; then SECOND=$CMAKEPATH;fi
 echo $SECOND
-CMAKEPATH2='\/Users\/mbattagi\/Gitbox\/alphacmakefiles'
-AHSRC='\/Users\/mbattagi\/Gitbox\/alphahouse'
+#CMAKEPATH2='\/Users\/mbattagi\/Gitbox\/alphacmakefiles'
+CMAKEPATH2='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphacmakefiles'
+AHSRC='\/Users\/ddeburc\/AlphaSuite_not_connected\/alphahouse\/src'
+#AHSRC='\/Users\/mbattagi\/Gitbox\/alphahouse'
 MAIN="CMakeLists_main.txt"
 SRC="CMakeLists_src.txt"
 
@@ -26,7 +29,7 @@ SRC="CMakeLists_src.txt"
  mkdir -p ./$FIRST/tests
  cd $FIRST
 #! git init
- touch ./$FIRST/tests/testSuites.inc
+ #touch $FIRST/tests/testSuites.inc
  PROG=./src/$FIRST.f90
 
  echo "program $FIRST" > $PROG 
@@ -41,9 +44,9 @@ SRC="CMakeLists_src.txt"
  AFTERSRC="$FIRST/src/CMakeLists.txt"
  cp $SECOND/$MAIN $AFTER
  cp $SECOND/$SRC $AFTERSRC
+sed -ie s/ALPHAHOUSESRCTOREPLACE/$AHSRC/g $AFTER
 sed -ie s/PROJECTNAMETOREPLACE/$FIRST/g $AFTER
 sed -ie s/TESTDEPTOREPLACE/$FIRST/g $AFTER
 sed -ie s/PROJECTSOURCETOREPLACE/$CMAKEPATH2/g $AFTER
 sed -ie s/PROJECTNAMETOREPLACE/$FIRST/g $AFTERSRC
-sed -ie s/ALPHAHOUSESRCTOREPLACE/$AHSRC/g $AFTER
 
