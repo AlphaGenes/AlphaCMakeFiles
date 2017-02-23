@@ -94,10 +94,10 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                          "/assume:realloc_lhs" # Intel Windows
                 )
 
-# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
-#                  Fortran "-DOS_UNIX"  # Intel
-#                          "-DOS_WIN" # Intel Windows
-#                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
+                 Fortran "-heap-arrays 1024"  # Intel
+                         "/heap-arrays:1024" # Intel Windows
+                )
 if (USE_OPENMP)
 message("flags here: ${OpenMP_Fortran_FLAGS}")
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
@@ -233,8 +233,8 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
 
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-fp-model precise"            # Intel
-                         "/fp:precise"           # Intel Windows
+                 Fortran "-fp-model fast"            # Intel
+                         "/fp:fast"           # Intel Windows
                 )
 
 
