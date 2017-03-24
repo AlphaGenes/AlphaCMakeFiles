@@ -18,6 +18,7 @@ ELSEIF(BT STREQUAL "DEBUG")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
       "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
       FORCE)
+      add_definitions(-DDEBUG)
 ELSEIF(BT STREQUAL "TESTING")
     SET (CMAKE_BUILD_TYPE TESTING CACHE STRING
       "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
@@ -213,6 +214,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                          "-fbacktrace"  # GNU (gfortran)
                          "-ftrace=full" # GNU (g95)
                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                   Fortran "-Xlinker -M"   # Intel/Portland Group
+                         "/map"   # Intel Windows
+                )
+
 
 
 
