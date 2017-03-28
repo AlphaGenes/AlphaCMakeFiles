@@ -92,11 +92,13 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-assume realloc_lhs"  # Intel
+                        "-std=f2008ts"
                          "/assume:realloc_lhs" # Intel Windows
                 )
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-heap-arrays 1024"  # Intel
+                         "-fno-automatic"
                          "/heap-arrays:1024" # Intel Windows
                 )
 if (USE_OPENMP)
@@ -240,6 +242,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                  Fortran "-fp-model fast"            # Intel
+                        "-msse2"
                          "/fp:fast"           # Intel Windows
                 )
 
@@ -253,6 +256,7 @@ endif(HDF5PATH)
 if (MKL_FOUND)
     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS  "${CMAKE_Fortran_FLAGS}"
                     Fortran "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS} -mkl"
+                    "-L${MKL_ROOT_LIB} -I${MKL_INCLUDE_DIRS}"
                     "/Qmkl"
                     )
 
