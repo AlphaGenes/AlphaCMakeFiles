@@ -30,13 +30,14 @@ ENDMACRO()
 
 # Find directories and files that we will want to remove
 FILE(GLOB_RECURSE CMAKECACHE "${TOPDIR}/*CMakeCache.txt")
+FILE(GLOB_RECURSE CMAKEFILESROOT "${TOPDIR}/CMakeFiles")
 FILE(GLOB_RECURSE CMAKEINSTALL "${TOPDIR}/*cmake_install.cmake"
                                "${TOPDIR}/*install_manifest.txt")
 FILE(GLOB_RECURSE MAKEFILE "${TOPDIR}/*Makefile")
 FILE(GLOB_RECURSE CMAKETESTFILES "${TOPDIR}/*CTestTestfile.cmake")
 SET(TOPDIRECTORIES "${TOPDIR}/objs" 
                    "${TOPDIR}/test"
-                   # "${TOPDIR}/bin"
+                #    "${TOPDIR}/bin/${CMAKEFILESROOT}"
 )
 
 # CMake has trouble finding directories recursively, so locate these
@@ -46,6 +47,7 @@ GET_PARENT_DIRECTORIES(LastTest.log CMAKETESTING 1)
 
 # Place these files and directories into a list
 SET(DEL ${TOPDIRECTORIES}
+        ${CMAKEFILES}
         ${CMAKECACHE}
         ${CMAKEINSTALL}
         ${MAKEFILE}
