@@ -3,9 +3,7 @@
 # When one is turned on, the other is turned off
 # If both are off, we explicitly disable them just in case
 OPTION(CHECK_PARA "Check if paralellization works" ON)
-IF (USE_OPENMP AND USE_MPI)
-    MESSAGE (FATAL_ERROR "Cannot use both OpenMP and MPI")
-ELSEIF (USE_OPENMP)
+IF (USE_OPENMP)
     # Find OpenMP
     IF (NOT OpenMP_Fortran_FLAGS)
         FIND_PACKAGE (OpenMP_Fortran)
@@ -17,23 +15,6 @@ ELSEIF (USE_OPENMP)
     UNSET (MPI_FOUND CACHE)
     UNSET (MPI_COMPILER CACHE)
     UNSET (MPI_LIBRARY CACHE)
-ELSEIF (USE_MPI)
-    # Find MPI
-    IF (NOT MPI_Fortran_FOUND)
-        FIND_PACKAGE (MPI REQUIRED)
-    ENDIF (NOT MPI_Fortran_FOUND)
-    MESSAGE (STATUS "here: ${MPI_FOUND}")
-    # Turn off OpenMP
-    # SET FLAGS!
-
-    # set(CMAKE_CXX_COMPILER "/home/lola/Packages/mpich2-1.3.2p1/bin/mpicxx")
-    # set(CMAKE_C_COMPILER "/home/lola/Packages/mpich2-1.3.2p1/bin/mpicc")
-
-
-    SET (OMP_NUM_PROCS 4 CACHE
-         STRING "Number of processors OpenMP may use" FORCE)
-    UNSET (OpenMP_C_FLAGS CACHE)
-    UNSET (GOMP_Fortran_LINK_FLAGS CACHE)
 ELSE ()
     # Turn off both OpenMP and MPI
     SET (OMP_NUM_PROCS 0 CACHE
@@ -43,4 +24,23 @@ ELSE ()
     UNSET (MPI_FOUND CACHE)
     UNSET (MPI_COMPILER CACHE)
     UNSET (MPI_LIBRARY CACHE)
-ENDIF (USE_OPENMP AND USE_MPI)
+ENDIF (USE_OPENMP)
+
+IF (USE_MPI)
+    # Find MPI
+    IF (NOT MPI_Fortran_FOUND)
+        FIND_PACKAGE (MPI REQUIRED)
+    ENDIF (NOT MPI_Fortran_FOUND)
+    MESSAGE (STATUS "MPI FOUND:: ${MPI_FOUND}")
+    # Turn off OpenMP
+    # SET FLAGS!
+
+    # set(CMAKE_CXX_COMPILER "/home/lola/Packages/mpich2-1.3.2p1/bin/mpicxx")
+    # set(CMAKE_C_COMPILER "/home/lola/Packages/mpich2-1.3.2p1/bin/mpicc")
+
+
+    SET (OMP_NUM_PROCS 8 CACHE
+         STRING "Number of processors OpenMP may use" FORCE)
+    UNSET (OpenMP_C_FLAGS CACHE)
+    UNSET (GOMP_Fortran_LINK_FLAGS CACHE)
+ENDIF (USE_MPI)
