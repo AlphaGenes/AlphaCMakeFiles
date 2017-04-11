@@ -239,11 +239,39 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                                   "/O3" # Intel Windows
                 )
 
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+                 Fortran REQUIRED "-ip" # All compilers not on Windows
+                                  "/Qip" # Intel Windows
+                )
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                  Fortran "-fp-model fast"            # Intel
                         "-msse2"
                          "/fp:fast"           # Intel Windows
+                )
+
+                SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+                 Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
+
+
+# Unroll loops
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+                 Fortran "-funroll-loops" # GNU
+                         "-unroll"        # Intel
+                         "/unroll"        # Intel Windows
+                         "-Munroll"       # Portland Group
+                )
+
+# Inline functions
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+                 Fortran "-inline"            # Intel
+                         "/Qinline"           # Intel Windows
+                         "-finline-functions" # GNU
+                         "-Minline"           # Portland Group
                 )
 
 
