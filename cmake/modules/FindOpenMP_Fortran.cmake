@@ -105,7 +105,7 @@ SET (OpenMP_Fortran_FLAGS "${OpenMP_Fortran_FLAGS_INTERNAL}"
      CACHE STRING "Fortran compiler flags for OpenMP parallization")
 
 
-message("Flags ${OpenMP_Fortran_FLAGS}")
+message("OpenMP Flags ${OpenMP_Fortran_FLAGS}")
 # handle the standard arguments for FIND_PACKAGE
 FIND_PACKAGE_HANDLE_STANDARD_ARGS (OpenMP_Fortran DEFAULT_MSG 
     OpenMP_Fortran_FLAGS)

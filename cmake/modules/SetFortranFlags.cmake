@@ -102,7 +102,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                          "/heap-arrays:1024" # Intel Windows
                 )
 if (USE_OPENMP)
-message("flags here: ${OpenMP_Fortran_FLAGS}")
+message("OpenMP fortran flags: ${OpenMP_Fortran_FLAGS}")
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "${OpenMP_Fortran_FLAGS}" # Intel
                 )

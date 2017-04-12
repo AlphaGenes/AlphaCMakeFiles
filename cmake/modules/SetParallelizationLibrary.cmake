@@ -4,7 +4,9 @@
 # If both are off, we explicitly disable them just in case
 OPTION(CHECK_PARA "Check if paralellization works" ON)
 IF (USE_OPENMP)
+
     # Find OpenMP
+    INCLUDE(${CMAKE_MODULE_PATH}/FindOpenMP_Fortran.cmake)
     IF (NOT OpenMP_Fortran_FLAGS)
         FIND_PACKAGE (OpenMP_Fortran)
         IF (NOT OpenMP_Fortran_FLAGS)
