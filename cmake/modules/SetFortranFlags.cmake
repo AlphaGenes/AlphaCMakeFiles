@@ -198,17 +198,10 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                          "-Munroll"       # Portland Group
                 )
 
-# Inline functions
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran "-inline"            # Intel
-                         "/Qinline"           # Intel Windows
-                         "-finline-functions" # GNU
-                         "-Minline"           # Portland Group
-                )
 # Single-file optimizations
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran "-ip"  # Intel
-                         "/Qip" # Intel Windows
+                 Fortran "-g"  # Intel
+                         "/Qg" # Intel Windows
                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                    Fortran "-traceback"   # Intel/Portland Group
