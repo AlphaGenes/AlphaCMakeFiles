@@ -183,8 +183,8 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 #                          "-ta=host"      # Portland Group
 #                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-    Fortran "-arch SSE4.2"        # Intel
-            "/arch:SSE4.2"       # Intel Windows
+  Fortran "-arch SSSE3"        # Intel
+  "/arch:SSSE3"       # Intel Windows
 
 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
