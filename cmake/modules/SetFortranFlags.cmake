@@ -176,12 +176,17 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran REQUIRED "-O3" # All compilers not on Windows
                                   "/O3" # Intel Windows
                 )
+# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+#                  Fortran "-xHost"        # Intel
+#                          "/QxHost"       # Intel Windows
+#                          ${GNUNATIVE}    # GNU
+#                          "-ta=host"      # Portland Group
+#                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran "-xHost"        # Intel
-                         "/QxHost"       # Intel Windows
-                         ${GNUNATIVE}    # GNU
-                         "-ta=host"      # Portland Group
-                )
+    Fortran "-arch AVX"        # Intel
+            "/arch:AVX"       # Intel Windows
+
+)
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran "-traceback"   # Intel/Portland Group
                          "/traceback"   # Intel Windows
