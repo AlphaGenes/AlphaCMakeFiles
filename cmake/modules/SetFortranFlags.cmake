@@ -37,7 +37,7 @@ ELSEIF(NOT BT)
       FORCE)
     MESSAGE(STATUS "CMAKE_BUILD_TYPE not given, defaulting to RELEASE")
 ELSE()
-    MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, PROFILE or TESTING")
+    MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, EDDIE, PROFILE or TESTING")
 ENDIF(BT STREQUAL "RELEASE")
 
 #########################################################
