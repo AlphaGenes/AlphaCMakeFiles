@@ -12,24 +12,28 @@ STRING(TOUPPER "${CMAKE_BUILD_TYPE}" BT)
 
 IF(BT STREQUAL "RELEASE")
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "DEBUG")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
       FORCE)
       add_definitions(-DDEBUG)
 ELSEIF(BT STREQUAL "TESTING")
     SET (CMAKE_BUILD_TYPE TESTING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      FORCE)
+ELSEIF(BT STREQUAL "EDDIE")
+    SET (CMAKE_BUILD_TYPE EDDIE CACHE STRING
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "PROFILE")
     SET (CMAKE_BUILD_TYPE PROFILING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
       FORCE)
 ELSEIF(NOT BT)
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
       FORCE)
     MESSAGE(STATUS "CMAKE_BUILD_TYPE not given, defaulting to RELEASE")
 ELSE()
@@ -40,9 +44,9 @@ ENDIF(BT STREQUAL "RELEASE")
 # If the compiler flags have already been set, return now
 #########################################################
 
-IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
+IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
     RETURN ()
-ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
+ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
 
 ########################################################################
 # Determine the appropriate flags for this compiler for each build type.
@@ -176,12 +180,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran REQUIRED "-O3" # All compilers not on Windows
                                   "/O3" # Intel Windows
                 )
-# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-#                  Fortran "-xHost"        # Intel
-#                          "/QxHost"       # Intel Windows
-#                          ${GNUNATIVE}    # GNU
-#                          "-ta=host"      # Portland Group
-#                 )
+
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
   Fortran "-arch SSSE3"        # Intel
   "/arch:SSSE3"       # Intel Windows
@@ -221,6 +220,55 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 
 
 
+#####################
+### TESTING FLAGS ###
+#####################
+
+# Optimizations
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 Fortran REQUIRED "-O3" # All compilers not on Windows
+                                  "/O3" # Intel Windows
+                )
+ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                  Fortran "-xHost"        # Intel
+                          "/QxHost"       # Intel Windows
+                          ${GNUNATIVE}    # GNU
+                          "-ta=host"      # Portland Group
+                 )
+
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
+
+
+# Unroll loops
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 Fortran "-funroll-loops" # GNU
+                         "-unroll"        # Intel
+                         "/unroll"        # Intel Windows
+                         "-Munroll"       # Portland Group
+                )
+
+# Single-file optimizations
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 Fortran "-g"  # Intel
+                         "/Qg" # Intel Windows
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                   Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                   Fortran "-Xlinker -M"   # Intel/Portland Group
+                         "/map"   # Intel Windows
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 Fortran "-p")
 
 
 #####################
