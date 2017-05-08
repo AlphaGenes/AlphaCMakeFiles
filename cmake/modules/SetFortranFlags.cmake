@@ -230,8 +230,8 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
                                   "/O3" # Intel Windows
                 )
  SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
-                  Fortran "-xHost"        # Intel
-                          "/QxHost"       # Intel Windows
+   Fortran "-xAVX"        # Intel
+   "/QxAVX"       # Intel Windows
                           ${GNUNATIVE}    # GNU
                           "-ta=host"      # Portland Group
                  )
@@ -245,30 +245,24 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
 
 
 # Unroll loops
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
-                 Fortran "-funroll-loops" # GNU
-                         "-unroll"        # Intel
-                         "/unroll"        # Intel Windows
-                         "-Munroll"       # Portland Group
-                )
+#SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 ##Fortran "-funroll-loops" # GNU
+                         #"-unroll"        # Intel
+                         #"/unroll"        # Intel Windows
+                         #"-Munroll"       # Portland Group
+                #)
 
 # Single-file optimizations
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
                  Fortran "-g"  # Intel
                          "/Qg" # Intel Windows
                 )
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
-                   Fortran "-traceback"   # Intel/Portland Group
-                         "/traceback"   # Intel Windows
-                         "-fbacktrace"  # GNU (gfortran)
-                         "-ftrace=full" # GNU (g95)
-                )
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
-                   Fortran "-Xlinker -M"   # Intel/Portland Group
-                         "/map"   # Intel Windows
-                )
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
-                 Fortran "-p")
+#SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                   #Fortran "-Xlinker -M"   # Intel/Portland Group
+                         #"/map"   # Intel Windows
+                #)
+#SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
+                 #Fortran "-p")
 
 
 #####################
