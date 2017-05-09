@@ -128,11 +128,12 @@ find_package_handle_standard_args(MKL DEFAULT_MSG
 if(WIN32)
     set(MKL_EXTRA_PATH "${MKL_ROOT}\\lib\\intel64")
     set(MKL_BLAS  mkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
-    set(MKL_SCALAPACK mkl_scalapack_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES}
+    set(MKL_SCALAPACK mkl_scalapack_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(MKL_LAPACK mkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
     set(MKL_ILP mkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(MKL_THREAD mkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
-    set(MKL_CORE mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES}))
+    set(MKL_CORE mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
+    message("WINDOWS MKL LIBS")
 else()
     if (APPLE)
         set(MKL_EXTRA_PATH "${MKL_ROOT}/lib")
@@ -154,6 +155,7 @@ set(MKL_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 
 message("BLAS PATH: ${MKL_EXTRA_PATH}")
 message("BLAS PATH: ${MKL_BLAS}")
+message("MKL_THREAD PATH: ${MKL_CORE}")
 include_directories(${MKL_LIBRARIES_INCLUDE})
 LINK_DIRECTORIES(${MKL_EXTRA_PATH})
 
