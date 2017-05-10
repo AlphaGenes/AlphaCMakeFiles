@@ -182,8 +182,8 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                 )
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-  Fortran "-arch SSSE3"        # Intel
-  "/arch:SSSE3"       # Intel Windows
+  Fortran "-xHost"        # Intel
+  "/QxHost"       # Intel Windows
 
 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
