@@ -131,6 +131,7 @@ if(WIN32)
     set(MKL_SCALAPACK mkl_scalapack_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(MKL_LAPACK mkl_lapack95_lp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
     set(MKL_ILP mkl_intel_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+    # lp64 vs ilp64 - ilp64 indexes are 64 bit unsigned 
     set(MKL_THREAD mkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
     set(MKL_CORE mkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
     message("WINDOWS MKL LIBS")
@@ -144,6 +145,7 @@ else()
     set(MKL_LAPACK libmkl_lapack95_lp64.a)
     set(MKL_SCALAPACK libmkl_scalapack_lp64.a )
     set(MKL_ILP libmkl_intel_lp64.a )
+    # lp64 vs ilp64 - ilp64 indexes are 64 bit unsigned 
     set(MKL_THREAD libmkl_intel_thread.a )
     set(MKL_CORE libmkl_core.a)
 
