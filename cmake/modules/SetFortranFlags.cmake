@@ -95,6 +95,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                          "-fpp" # Intel Windows
                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
+                 Fortran "-standard-semantics"  # Intel
+                         "/standard-semantics" # Intel Windows
+                )
+
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
                  Fortran "-assume realloc_lhs"  # Intel
                         "-std=f2008ts"
                          "/assume:realloc_lhs" # Intel Windows
