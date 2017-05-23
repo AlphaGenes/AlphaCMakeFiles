@@ -191,6 +191,9 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
   "/QxHost"       # Intel Windows
 
 )
+
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+  Fortran "-finstrument-functions -g")
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran "-traceback"   # Intel/Portland Group
                          "/traceback"   # Intel Windows
