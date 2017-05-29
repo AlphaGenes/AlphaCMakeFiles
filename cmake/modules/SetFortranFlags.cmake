@@ -188,8 +188,17 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 
 )
 
+
+if (APPLE)
+# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+#   Fortran "-finstrument-functions -g -save-temps")
+elseif(WIN32)
+
+
+else()
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
   Fortran "-finstrument-functions -g")
+endif()
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran "-traceback"   # Intel/Portland Group
                          "/traceback"   # Intel Windows
