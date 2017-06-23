@@ -3,7 +3,11 @@ set(PFUNIT_DIR $ENV{PFUNITDIR})
 
 
 if (NOT PFUNIT_DIR)
-SET (PFUNIT_DIR "/usr/local/pFUnit_serial")
+  if (USE_MPI) 
+    SET(PFUNIT_DIR "/usr/local/pFUnit_Parallel")
+  else (USE_MPI)
+    SET (PFUNIT_DIR "/usr/local/pFUnit_serial")
+  endif(USE_MPI)
 endif(NOT PFUNIT_DIR)
 
 enable_testing()
