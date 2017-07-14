@@ -34,6 +34,8 @@ IF (USE_MPI)
         FIND_PACKAGE (MPI REQUIRED)
     ENDIF (NOT MPI_Fortran_FOUND)
     MESSAGE (STATUS "MPI FOUND:: ${MPI_FOUND}")
+
+    add_definitions(-DMPIACTIVE)
     # Turn off OpenMP
     # SET FLAGS!
 
