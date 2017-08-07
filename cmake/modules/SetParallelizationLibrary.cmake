@@ -36,6 +36,7 @@ IF (USE_MPI)
     MESSAGE (STATUS "MPI FOUND:: ${MPI_FOUND}")
 
     add_definitions(-DMPIACTIVE)
+    add_definitions(-DUSE_MPI)
     # Turn off OpenMP
     # SET FLAGS!
 
