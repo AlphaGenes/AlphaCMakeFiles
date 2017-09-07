@@ -35,7 +35,7 @@ set(INTEL_RTL_ROOT ${INTEL_ROOT}/lib)
 # Find include dir
 
 
-find_path(MKL_INCLUDE_DIR mkl.h
+find_path(MKL_INCLUDE_DIR mkl.fi
     PATHS ${MKL_ROOT}/include)
 
 # Find include directory
