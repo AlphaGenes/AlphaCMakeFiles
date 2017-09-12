@@ -32,8 +32,10 @@ IF (USE_MPI)
     # Find MPI
     IF (NOT MPI_Fortran_FOUND)
         FIND_PACKAGE (MPI REQUIRED)
+        # include(FindMPI)
     ENDIF (NOT MPI_Fortran_FOUND)
     MESSAGE (STATUS "MPI FOUND:: ${MPI_FOUND}")
+    MESSAGE (STATUS "MPI COMPILER:: ${MPI_LIBRARIES}")
 
     add_definitions(-DMPIACTIVE)
     add_definitions(-DUSE_MPI)
