@@ -311,19 +311,19 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
                                   "/O3" # Intel Windows
                 )
 
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran REQUIRED "-ip" # All compilers not on Windows
-                                  "/Qip" # Intel Windows
-                )
+# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+#                  Fortran REQUIRED "-ipo" # All compilers not on Windows
+#                                   "/Qipo" # Intel Windows
+#                 )
+
+# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
+#                  Fortran "-fp-model fast"            # Intel
+#                          "/fp:fast"           # Intel Windows
+#                 )
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-fp-model fast"            # Intel
-                         "/fp:fast"           # Intel Windows
-                )
-
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
-                 Fortran "-xSSE4.2"            # Intel
-                        "/xSSE4.2"            # Intel
+                 Fortran "-xSSSE3"            # Intel
+                        "/xSSSE3"            # Intel
                 )
 
                 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_RELEASE "${CMAKE_Fortran_FLAGS_RELEASE}"
