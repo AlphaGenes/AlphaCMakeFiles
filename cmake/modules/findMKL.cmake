@@ -121,7 +121,6 @@ else()
     set(MKL_MINIMAL_LIBRARY ${MKL_INTERFACE_LIBRARY} ${MKL_THREADING_LIBRARY} ${MKL_CORE_LIBRARY} ${MKL_RTL_LIBRARY})
 endif()
 
-set(CMAKE_FIND_LIBRARY_SUFFIXES ${_MKL_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
 
 find_package_handle_standard_args(MKL DEFAULT_MSG
     MKL_INCLUDE_DIR MKL_LIBRARY MKL_MINIMAL_LIBRARY)
@@ -144,22 +143,16 @@ else()
         set(MKL_EXTRA_PATH "${MKL_ROOT}/lib/intel64")
     endif()
     if (USE_MPI)
-      set(MKL_BLACS libmkl_blacs_${BLACSLIBRARY}_lp64.a)
+      set(MKL_BLACS libmkl_blacs_${BLACSLIBRARY}_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+      set(MKL_SCALAPACK libmkl_scalapack_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     endif() 
-    set(MKL_BLAS  libmkl_blas95_lp64.a)
-    set(MKL_LAPACK libmkl_lapack95_lp64.a)
-    if (APPLE)
-      set(MKL_SCALAPACK libmkl_scalapack_lp64.dylib)
-      set(MKL_ILP libmkl_intel_lp64.dylib )
-      set(MKL_THREAD libmkl_intel_thread.dylib )
-      set(MKL_CORE libmkl_core.dylib)
-    else()
-      set(MKL_SCALAPACK libmkl_scalapack_lp64.so)
-      set(MKL_ILP libmkl_intel_lp64.so )
-      set(MKL_THREAD libmkl_intel_thread.so )
-      set(MKL_CORE libmkl_core.so)
-    endif(APPLE) 
 
+    set(MKL_BLAS  libmkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(MKL_LAPACK libmkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+      
+      set(MKL_ILP libmkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
+      set(MKL_THREAD libmkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
+      set(MKL_CORE libmkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
 
     # lp64 vs ilp64 - ilp64 indexes are 64 bit unsigned 
 
