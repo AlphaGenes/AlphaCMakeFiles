@@ -159,11 +159,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                                      # Portland Group (on by default)
                 )
 
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
-                 Fortran "-check contiguous" # Intel
-                         "/check:contiguous" # Intel Windows
-                                     # Portland Group (on by default)
-                )
+# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+#                  Fortran "-check contiguous" # Intel
+#                          "/check:contiguous" # Intel Windows
+#                                      # Portland Group (on by default)
+#                 )
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                  Fortran "-check output_conversion" # Intel
                          "/check:output_conversion" # Intel Windows
