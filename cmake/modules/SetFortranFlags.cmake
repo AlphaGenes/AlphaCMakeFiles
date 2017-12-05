@@ -12,45 +12,49 @@ STRING(TOUPPER "${CMAKE_BUILD_TYPE}" BT)
 
 IF(BT STREQUAL "RELEASE")
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "DEBUG")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "DEBUG1")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
       add_definitions(-DDEBUG)
 ELSEIF(BT STREQUAL "TESTING")
     SET (CMAKE_BUILD_TYPE TESTING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      FORCE)
+ELSEIF(BT STREQUAL "ACCURACY")
+    SET (CMAKE_BUILD_TYPE ACCURACY CACHE STRING
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "EDDIE")
     SET (CMAKE_BUILD_TYPE EDDIE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "PROFILE")
     SET (CMAKE_BUILD_TYPE PROFILING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(NOT BT)
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
       FORCE)
-    MESSAGE(STATUS "CMAKE_BUILD_TYPE not given, defaulting to RELEASE")
-ELSE()
-    MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, EDDIE, PROFILE or TESTING")
-ENDIF(BT STREQUAL "RELEASE")
-
+      ELSE()
+      MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, EDDIE, PROFILE or TESTING")
+      ENDIF(BT STREQUAL "RELEASE")
+      
+    MESSAGE(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
 #########################################################
 # If the compiler flags have already been set, return now
 #########################################################
 
-IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
+IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE AND CMAKE_Fortran_FLAGS_ACCURACY)
     RETURN ()
-ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE)
+ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE AND CMAKE_Fortran_FLAGS_ACCURACY)
 
 ########################################################################
 # Determine the appropriate flags for this compiler for each build type.
@@ -273,9 +277,45 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 
 
 #####################
-### TESTING FLAGS ###
+### ACCURACY FLAGS ###
 #####################
+# Optimizations
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+                 Fortran REQUIRED "-O3" # All compilers not on Windows
+                                  "/O3" # Intel Windows
+                )
 
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+  Fortran "-xSSE4.1"        # Intel
+  "/QxSSE4.1"       # Intel Windows
+
+)
+
+
+if (APPLE)
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+  Fortran "-g")
+elseif(WIN32)
+
+
+else()
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+  Fortran "-finstrument-functions -g")
+endif()
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+                 Fortran "-traceback"   # Intel/Portland Group
+                         "/traceback"   # Intel Windows
+                         "-fbacktrace"  # GNU (gfortran)
+                         "-ftrace=full" # GNU (g95)
+                )
+            SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_ACCURACY "${CMAKE_Fortran_FLAGS_ACCURACY}"
+            Fortran "-fltconsistency"   # Intel/Portland Group
+                    "/fltconsistency"   # Intel Windows
+            )
+
+#####################
+### EDDIE FLAGS ###
+#####################
 # Optimizations
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
                  Fortran REQUIRED "-O3" # All compilers not on Windows
