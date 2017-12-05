@@ -143,7 +143,32 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                          "-Wall"     # GNU
                                      # Portland Group (on by default)
                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-check pointers" # Intel
+                         "/check:pointers" # Intel Windows
+                                     # Portland Group (on by default)
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-check stack" # Intel
+                         "/check:stack" # Intel Windows
+                                     # Portland Group (on by default)
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-check uninit" # Intel
+                         "/check:uninit" # Intel Windows
+                                     # Portland Group (on by default)
+                )
 
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-check contiguous" # Intel
+                         "/check:contiguous" # Intel Windows
+                                     # Portland Group (on by default)
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-check output_conversion" # Intel
+                         "/check:output_conversion" # Intel Windows
+                                     # Portland Group (on by default)
+                )
 # Traceback
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                  Fortran "-traceback"   # Intel/Portland Group
@@ -174,11 +199,15 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
                         "/assume:protect_parens"
                 ) 
 
-# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
-#                  Fortran "-check all"  # Intel
-#                          "/check:all"  # Intel Windows
-
-#                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-warn interface"  # Intel
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-fpe0"  # Intel
+                )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG}"
+                 Fortran "-g"  # Intel
+                )
 
 #####################
 ### TESTING FLAGS ###
