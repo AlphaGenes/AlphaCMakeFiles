@@ -7,6 +7,12 @@
 ####################################################################
 INCLUDE(${CMAKE_MODULE_PATH}/SetCompileFlags.cmake)
 
+
+if (WIN32)
+message("Environment set to OS_WIN - flags should be set in visual studio")
+add_definitions(-DOS_WIN)
+RETURN()
+endif()
 # Make sure the build type is uppercase
 STRING(TOUPPER "${CMAKE_BUILD_TYPE}" BT)
 
