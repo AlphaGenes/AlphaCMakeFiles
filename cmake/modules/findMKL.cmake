@@ -149,7 +149,6 @@ else()
 
     set(MKL_BLAS  libmkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(MKL_LAPACK libmkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
-      
       set(MKL_ILP libmkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
       set(MKL_THREAD libmkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
       set(MKL_CORE libmkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
