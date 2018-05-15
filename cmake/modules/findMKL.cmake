@@ -1,4 +1,5 @@
-# - Find Intel MKL
+#
+# Find Intel MKL
 # Find the MKL libraries
 #
 # Options:
@@ -143,21 +144,22 @@ else()
         set(MKL_EXTRA_PATH "${MKL_ROOT}/lib/intel64")
     endif()
     if (USE_MPI)
-      set(MKL_BLACS libmkl_blacs_${BLACSLIBRARY}_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
-      set(MKL_SCALAPACK libmkl_scalapack_lp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+      set(MKL_BLACS libmkl_blacs_${BLACSLIBRARY}_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
+      set(MKL_SCALAPACK libmkl_scalapack_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     endif() 
 
     set(MKL_BLAS  libmkl_blas95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
     set(MKL_LAPACK libmkl_lapack95_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES})
-      set(MKL_ILP libmkl_intel_ilp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
+      
+      set(MKL_ILP libmkl_intel_lp64${CMAKE_FIND_LIBRARY_SUFFIXES} )
       set(MKL_THREAD libmkl_intel_thread${CMAKE_FIND_LIBRARY_SUFFIXES} )
       set(MKL_CORE libmkl_core${CMAKE_FIND_LIBRARY_SUFFIXES})
 
     # lp64 vs ilp64 - ilp64 indexes are 64 bit unsigned 
-
+    set(MKL_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 endif(WIN32)
 # set(MKL_LIBRARIES  "${MKL_ROOT}/lib/intel64/libmkl_blas95_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKL_ROOT}/lib/intel64/libmkl_intel_thread.a ${MKL_ROOT}/lib/intel64/libmkl_core.a")
-set(MKL_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/lp64)
+
 
 
 
