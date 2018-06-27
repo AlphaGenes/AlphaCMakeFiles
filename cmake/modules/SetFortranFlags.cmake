@@ -11,6 +11,16 @@ INCLUDE(${CMAKE_MODULE_PATH}/SetCompileFlags.cmake)
 if (WIN32)
 message("Environment set to OS_WIN - flags should be set in visual studio")
 add_definitions(-DOS_WIN)
+ add_definitions(-DOS_WIN)
+     SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
+                Fortran "/libs:static"
+ )
+ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
+                Fortran "/heap-arrays:0"
+ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
+                Fortran "/Qmkl"
+ )
+    SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
 RETURN()
 endif()
 # Make sure the build type is uppercase
