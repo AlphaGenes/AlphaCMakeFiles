@@ -20,7 +20,6 @@ add_definitions(-DOS_WIN)
  SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
                 Fortran "/Qmkl"
  )
-    SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"
 RETURN()
 endif()
 # Make sure the build type is uppercase
