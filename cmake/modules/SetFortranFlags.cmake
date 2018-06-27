@@ -16,10 +16,10 @@ add_definitions(-DOS_WIN)
                 Fortran "/libs:static"
  )
  SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
-                Fortran "/heap-arrays:0"
+                Fortran "/heap-arrays:0")
  SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS}"              
-                Fortran "/Qmkl"
- )
+                Fortran "/Qmkl")
+
 RETURN()
 endif()
 # Make sure the build type is uppercase
