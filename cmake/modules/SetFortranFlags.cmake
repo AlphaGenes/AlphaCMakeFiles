@@ -238,11 +238,11 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                                   "/O3" # Intel Windows
                 )
 
-
+if (APPLE)
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran REQUIRED "-Wl -Map" # All compilers not on Windows
+                 Fortran "-Wl,-Map -Xlinker -M" # All compilers not on Windows
                 )                
-                
+endif(APPLE)                
 
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
   Fortran "-xHost"        # Intel
@@ -251,16 +251,6 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 )
 
 
-if (APPLE)
-# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-#   Fortran "-finstrument-functions -g -save-temps")
-elseif(WIN32)
-
-
-else()
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-  Fortran "-finstrument-functions -g")
-endif()
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran "-traceback"   # Intel/Portland Group
                          "/traceback"   # Intel Windows
@@ -285,10 +275,9 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 #                 )
 
 # Single-file optimizations
-# SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-#                  Fortran "-g"  # Intel
-#                          "/Qg" # Intel Windows
-#                 )
+SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
+                 Fortran "-g"  # Intel
+                )
 
 # SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
 #                    Fortran "-Xlinker -M"   # Intel/Portland Group
