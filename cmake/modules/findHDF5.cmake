@@ -1,12 +1,11 @@
 # INCLUDE(${CMAKE_MODULE_PATH}/SetCompileFlags.cmake)
 
-
-
 set(HDF5_USE_STATIC_LIBRARIES ON)
 # find_package(HDF5 REQUIRED)
 IF (DEFINED ENV{HDF5})
   SET (HDF5PATH $ENV{HDF5})
 else(DEFINED ENV{HDF5})
+  # Default location for hdf5 - can be changed as neccessary
   SET (HDF5PATH "/usr/local/hdf5_2015/")
 endif(DEFINED ENV{HDF5})
 

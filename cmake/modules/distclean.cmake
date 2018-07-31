@@ -1,4 +1,4 @@
-     # This CMake script will delete build directories and files to bring the
+# This CMake script will delete build directories and files to bring the
 # package back to it's distribution state
 
 # We want to start from the top of the source dir, so if we are in build
