@@ -79,46 +79,46 @@ endif()
 
 # MKL is composed by four layers: Interface, Threading, Computational and RTL
 
-# if(MKL_SDL)
-#     find_library(MKL_LIBRARY libmkl_rt
-#         PATHS ${MKL_ROOT_LIB})
+if(MKL_SDL)
+    find_library(MKL_LIBRARY libmkl_rt
+        PATHS ${MKL_ROOT_LIB})
 
-#     set(MKL_MINIMAL_LIBRARY ${MKL_LIBRARY})
-# else()
-#     ######################### Interface layer #######################
-#     if(WIN32)
-#         set(MKL_INTERFACE_LIBNAME libmkl_intel_c)
-#     else()
-#         set(MKL_INTERFACE_LIBNAME libmkl_intel)
-#     endif()
-#     # find_library(MKL_INTERFACE_LIBRARY ${MKL_INTERFACE_LIBNAME} PATHS ${MKL_ROOT}/lib/)
-#     SET(MKL_INTERFACE_LIBRARY ${MKL_ROOT_LIB}/${MKL_INTERFACE_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(MKL_MINIMAL_LIBRARY ${MKL_LIBRARY})
+else()
+    ######################### Interface layer #######################
+    if(WIN32)
+        set(MKL_INTERFACE_LIBNAME libmkl_intel_c)
+    else()
+        set(MKL_INTERFACE_LIBNAME libmkl_intel)
+    endif()
+    # find_library(MKL_INTERFACE_LIBRARY ${MKL_INTERFACE_LIBNAME} PATHS ${MKL_ROOT}/lib/)
+    SET(MKL_INTERFACE_LIBRARY ${MKL_ROOT_LIB}/${MKL_INTERFACE_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
 
-#     ######################## Threading layer ########################
-#     if(MKL_MULTI_THREADED)
-#         set(MKL_THREADING_LIBNAME libmkl_intel_thread)
-#     else()
-#         set(MKL_THREADING_LIBNAME libmkl_sequential)
-#     endif()
-#     # find_library(MKL_THREADING_LIBRARY ${MKL_THREADING_LIBNAME}
-#     #     PATHS ${MKL_ROOT}/lib/)
-#     SET(MKL_THREADING_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
-#     ####################### Computational layer #####################
-#     # find_library(MKL_CORE_LIBRARY libmkl_core
-#         # PATHS ${MKL_ROOT}/lib/)
-#     # SET(MKL_CORE_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
-#     ############################ RTL layer ##########################
-#     if(WIN32)
-#         set(MKL_RTL_LIBNAME libiomp5md)
-#     else()
-#         set(MKL_RTL_LIBNAME libiomp5)
-#     endif()
-#     # find_library(MKL_RTL_LIBRARY ${MKL_RTL_LIBNAME}
-#     #     PATHS ${INTEL_RTL_ROOT}/lib)
-#     SET(MKL_RTL_LIBRARY ${INTEL_RTL_ROOT}/${MKL_RTL_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
-#     set(MKL_LIBRARY ${MKL_INTERFACE_LIBRARY} ${MKL_THREADING_LIBRARY} ${MKL_CORE_LIBRARY} ${MKL_RTL_LIBRARY})
-#     set(MKL_MINIMAL_LIBRARY ${MKL_INTERFACE_LIBRARY} ${MKL_THREADING_LIBRARY} ${MKL_CORE_LIBRARY} ${MKL_RTL_LIBRARY})
-# endif()
+    ######################## Threading layer ########################
+    if(MKL_MULTI_THREADED)
+        set(MKL_THREADING_LIBNAME libmkl_intel_thread)
+    else()
+        set(MKL_THREADING_LIBNAME libmkl_sequential)
+    endif()
+    # find_library(MKL_THREADING_LIBRARY ${MKL_THREADING_LIBNAME}
+    #     PATHS ${MKL_ROOT}/lib/)
+    SET(MKL_THREADING_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
+    ####################### Computational layer #####################
+    # find_library(MKL_CORE_LIBRARY libmkl_core
+        # PATHS ${MKL_ROOT}/lib/)
+    # SET(MKL_CORE_LIBRARY ${MKL_ROOT_LIB}/${MKL_THREADING_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
+    ############################ RTL layer ##########################
+    if(WIN32)
+        set(MKL_RTL_LIBNAME libiomp5md)
+    else()
+        set(MKL_RTL_LIBNAME libiomp5)
+    endif()
+    # find_library(MKL_RTL_LIBRARY ${MKL_RTL_LIBNAME}
+    #     PATHS ${INTEL_RTL_ROOT}/lib)
+    SET(MKL_RTL_LIBRARY ${INTEL_RTL_ROOT}/${MKL_RTL_LIBNAME}${CMAKE_FIND_LIBRARY_SUFFIXES})
+    set(MKL_LIBRARY ${MKL_INTERFACE_LIBRARY} ${MKL_THREADING_LIBRARY} ${MKL_CORE_LIBRARY} ${MKL_RTL_LIBRARY})
+    set(MKL_MINIMAL_LIBRARY ${MKL_INTERFACE_LIBRARY} ${MKL_THREADING_LIBRARY} ${MKL_CORE_LIBRARY} ${MKL_RTL_LIBRARY})
+endif()
 
 
 find_package_handle_standard_args(MKL DEFAULT_MSG
@@ -157,7 +157,7 @@ else()
     # lp64 vs ilp64 - ilp64 indexes are 64 bit unsigned 
     set(MKL_LIBRARIES_INCLUDE ${MKL_ROOT}/include/intel64/ilp64)
 endif(WIN32)
-set(MKL_LIBRARIES  ${MKL_BLAS} ${MKL_LAPACK} ${MKL_ILP} ${MKL_THREAD} ${MKL_CORE})
+
 
 
 message("BLAS PATH: ${MKL_EXTRA_PATH}")
@@ -181,7 +181,9 @@ FIND_LIBRARY(MKL_ILP_LIB ${MKL_ILP} PATHS ${MKL_EXTRA_PATH})
 FIND_LIBRARY(MKL_THREAD_LIB ${MKL_THREAD} PATHS ${MKL_EXTRA_PATH})
 FIND_LIBRARY(MKL_CORE_LIB ${MKL_CORE} PATHS ${MKL_EXTRA_PATH})
 
-FIND_LIBRARY(MKL_LIBRARY ${MKL_LIBRARIES} PATHS ${MKL_EXTRA_PATH})
+# Get all MKL libs as one
+set(MKL_MIX  ${MKL_BLAS_LIB} ${MKL_LAPACK_LIB} ${MKL_ILP_LIB} ${MKL_THREAD_LIB} ${MKL_CORE_LIB})
+FIND_LIBRARY(MKL_DEFAULT_LIBS ${MKL_MIX} PATHS ${MKL_EXTRA_PATH})
 
 #Link to blas like this  TARGET_LINK_LIBRARIES(${TESTPROG} ${RESULT})
 if(MKL_FOUND)
