@@ -27,39 +27,36 @@ STRING(TOUPPER "${CMAKE_BUILD_TYPE}" BT)
 
 IF(BT STREQUAL "RELEASE")
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "DEBUG")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "DEBUG1")
     SET (CMAKE_BUILD_TYPE DEBUG CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
       add_definitions(-DDEBUG)
 ELSEIF(BT STREQUAL "TESTING")
     SET (CMAKE_BUILD_TYPE TESTING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "ACCURACY")
     SET (CMAKE_BUILD_TYPE ACCURACY CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
 ELSEIF(BT STREQUAL "EDDIE")
     SET (CMAKE_BUILD_TYPE EDDIE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
-ELSEIF(BT STREQUAL "PROFILE")
-    SET (CMAKE_BUILD_TYPE PROFILING CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
-      FORCE)
+
 ELSEIF(NOT BT)
     SET(CMAKE_BUILD_TYPE RELEASE CACHE STRING
-      "Choose the type of build, options are DEBUG, RELEASE,PROFILE,EDDIE,ACCURACY or TESTING."
+      "Choose the type of build, options are DEBUG, RELEASE,EDDIE,ACCURACY or TESTING."
       FORCE)
       ELSE()
-      MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, EDDIE, PROFILE or TESTING")
+      MESSAGE(FATAL_ERROR "CMAKE_BUILD_TYPE not valid, choices are DEBUG, RELEASE, EDDIE or TESTING")
       ENDIF(BT STREQUAL "RELEASE")
       
     MESSAGE(STATUS "CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")
@@ -67,9 +64,9 @@ ELSEIF(NOT BT)
 # If the compiler flags have already been set, return now
 #########################################################
 
-IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE AND CMAKE_Fortran_FLAGS_ACCURACY)
+IF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_ACCURACY)
     RETURN ()
-ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_PROFILE AND CMAKE_Fortran_FLAGS_ACCURACY)
+ENDIF(CMAKE_Fortran_FLAGS_RELEASE AND CMAKE_Fortran_FLAGS_TESTING AND CMAKE_Fortran_FLAGS_EDDIE AND CMAKE_Fortran_FLAGS_DEBUG AND CMAKE_Fortran_FLAGS_ACCURACY)
 
 ########################################################################
 # Determine the appropriate flags for this compiler for each build type.
@@ -339,11 +336,6 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_EDDIE "${CMAKE_Fortran_FLAGS_EDDIE}"
                  Fortran "-gen-interfaces -warn interfaces"   # Intel
               )
 
-#####################
-### PROFILEFLAGS ###
-#####################
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_PROFILE "${CMAKE_Fortran_FLAGS_PROFILE}"
-                 Fortran "-p")
 #####################
 ### RELEASE FLAGS ###
 #####################
