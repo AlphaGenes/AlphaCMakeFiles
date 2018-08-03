@@ -234,13 +234,7 @@ SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
                  Fortran REQUIRED "-O3" # All compilers not on Windows
                                   "/O3" # Intel Windows
                 )
-
-if (APPLE)
-SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
-                 Fortran "-Wl,-Map -Xlinker -M" # All compilers not on Windows
-                )                
-endif(APPLE)                
-
+                
 SET_COMPILE_FLAG(CMAKE_Fortran_FLAGS_TESTING "${CMAKE_Fortran_FLAGS_TESTING}"
   Fortran "-xHost"        # Intel
   "/QxHost"       # Intel Windows
